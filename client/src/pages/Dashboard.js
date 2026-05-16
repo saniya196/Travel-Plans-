@@ -174,8 +174,8 @@ const Dashboard = () => {
       {/* Nav Items */}
       <List sx={{ flexGrow: 1, pt: 1, px: 1 }}>
         {menuItems.map((item) => (
-          <Tooltip title={item.text} placement="right" arrow key={item.text}>
-            <ListItem disablePadding sx={{ mb: 0.5 }}>
+          <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
+            <Tooltip title={item.text} placement="right" arrow>
               <ListItemButton
                 component={Link}
                 to={`/dashboard/${item.path}`}
@@ -209,8 +209,8 @@ const Dashboard = () => {
                   }}
                 />
               </ListItemButton>
-            </ListItem>
-          </Tooltip>
+            </Tooltip>
+          </ListItem>
         ))}
       </List>   
 
