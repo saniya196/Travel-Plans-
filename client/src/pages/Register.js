@@ -130,33 +130,29 @@ const Register = () => {
             <Typography variant="h6" sx={{ mb: 3 }}>
               Let's get to know you
             </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                  value={formData.firstName}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
+            <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2 }}>
+              <TextField
+                autoComplete="given-name"
+                name="firstName"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                autoFocus
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+              <TextField
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="family-name"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </Box>
           </>
         );
       case 1:
@@ -413,20 +409,23 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
               <Box sx={{ mb: 4 }}>{getStepContent(activeStep)}</Box>
 
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  startIcon={<ArrowBackIcon />}
-                  sx={{ visibility: activeStep === 0 ? "hidden" : "visible" }}
-                >
-                  Back
-                </Button>
+              <Box sx={{ display: "flex", gap: 2 }}>
+                {activeStep > 0 && (
+                  <Button
+                    onClick={handleBack}
+                    startIcon={<ArrowBackIcon />}
+                    variant="outlined"
+                    sx={{ flex: 1, py: 1.5, borderRadius: 2, fontWeight: 600 }}
+                  >
+                    Back
+                  </Button>
+                )}
                 <Button
                   type="submit"
                   variant="contained"
                   color="primary"
                   disabled={isNextDisabled()}
+                  sx={{ flex: 1, py: 1.5, borderRadius: 2, fontWeight: 600 }}
                   endIcon={
                     activeStep === steps.length - 1 ? (
                       <HowToRegIcon />
