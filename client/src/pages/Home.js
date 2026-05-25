@@ -924,6 +924,7 @@ const Home = () => {
           </div>
 
           <div className="wander-footer-socials">
+            {/* Social media icons */}
             <a href="/" aria-label="Facebook">
               <FaFacebook />
             </a>
