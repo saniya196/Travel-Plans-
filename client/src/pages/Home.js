@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Home.css";
 import api from "../services/api";
 import { addTrip } from "../redux/actions/tripActions";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 /* ── SVG SCENES ─────────────────────────────────────────────── */
 const SceneIceland = () => (
   <svg
@@ -932,7 +931,7 @@ const Home = () => {
               <FaInstagram />
             </a>
             <a href="/" aria-label="Twitter">
-              <FaXTwitter />
+              <FaTwitter />
             </a>
           </div>
         </div>
