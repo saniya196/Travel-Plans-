@@ -26,19 +26,13 @@ const limiter = rateLimit({
 app.use("/api/auth", limiter);
 
 // Core Middleware
-const allowedOrigins = ["http://localhost:3000"];
-if (process.env.FRONTEND_URL) {
-  allowedOrigins.push(process.env.FRONTEND_URL);
-}
-
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
       if (
-        allowedOrigins.indexOf(origin) !== -1 ||
-        process.env.NODE_ENV !== "production"
+        !origin ||
+        origin.includes("vercel.app") ||
+        origin.includes("localhost")
       ) {
         callback(null, true);
       } else {
