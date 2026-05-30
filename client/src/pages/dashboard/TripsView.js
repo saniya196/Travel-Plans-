@@ -326,8 +326,15 @@ const TripsView = () => {
                         />
                       </Box>
                     </Box>
-                    <CardContent sx={{ pb: "12px !important", p: { xs: 2, sm: 3 } }}>
-                      <Typography variant="h6" fontWeight={700} gutterBottom sx={{ wordBreak: "break-word" }}>
+                    <CardContent
+                      sx={{ pb: "12px !important", p: { xs: 2, sm: 3 } }}
+                    >
+                      <Typography
+                        variant="h6"
+                        fontWeight={700}
+                        gutterBottom
+                        sx={{ wordBreak: "break-word" }}
+                      >
                         {trip.destination}
                       </Typography>
                       <Box

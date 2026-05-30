@@ -462,7 +462,11 @@ const BookingView = () => {
                     />
                   </Box>
                   <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
-                    <Typography variant="h6" fontWeight={700} sx={{ wordBreak: "break-word" }}>
+                    <Typography
+                      variant="h6"
+                      fontWeight={700}
+                      sx={{ wordBreak: "break-word" }}
+                    >
                       {hotel.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" mb={1}>
