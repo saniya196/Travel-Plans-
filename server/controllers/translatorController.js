@@ -1,5 +1,5 @@
 const translate = require("google-translate-api-x");
-const supportedLanguages = [
+const SUPPORTED_LANGUAGES = [
   { code: "auto", name: "Auto Detect" },
   { code: "en", name: "English" },
   { code: "hi", name: "Hindi" },
