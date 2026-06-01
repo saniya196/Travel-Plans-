@@ -88,7 +88,6 @@ const ExpensesView = () => {
 
   const { expenses, expenseSummary, loading, exchangeRates, baseCurrency } =
     useSelector((state) => state.expenses);
-  const { expenses, loading } = useSelector((state) => state.expenses);
   const { trips } = useSelector((state) => state.trips);
 
   const [activeTripId, setActiveTripId] = useState("");
