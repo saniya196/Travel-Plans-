@@ -37,6 +37,7 @@ import HotelIcon from "@mui/icons-material/Hotel";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import LuggageIcon from "@mui/icons-material/Luggage";
+import ShieldIcon from "@mui/icons-material/Shield";
 
 import { logout } from "../redux/actions/authActions";
 
@@ -50,6 +51,7 @@ import BookingView from "./dashboard/BookingView";
 import ProfileView from "./dashboard/ProfileView";
 import TripDetail from "./dashboard/TripDetail";
 import PackingView from "./dashboard/PackingView";
+import CultureSafetyAlerts from "./dashboard/CultureSafetyAlerts";
 
 const drawerWidth = 280;
 
@@ -64,33 +66,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  const notifications = [
-    {
-      id: 1,
-      title: "Trip created successfully",
-      time: "2 min ago",
-    },
-    {
-      id: 2,
-      title: "Weather forecast updated",
-      time: "10 min ago",
-    },
-    {
-      id: 3,
-      title: "Budget exceeded for Goa trip",
-      time: "1 hour ago",
-    },
-    {
-      id: 4,
-      title: "New destination suggestions available",
-      time: "Today",
-    },
-    {
-      id: 5,
-      title: "Manali trip completed",
-      time: "Yesterday",
-    },
-  ];
+  const notifications = [];
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
   const handleMenu = (event) => setAnchorEl(event.currentTarget);
@@ -118,6 +94,7 @@ const Dashboard = () => {
     { text: "Translator", path: "translator", icon: <TranslateIcon /> },
     { text: "Bookings", path: "bookings", icon: <HotelIcon /> },
     { text: "Packing", path: "packing", icon: <LuggageIcon /> },
+    { text: "Safety & Culture", path: "culture-safety", icon: <ShieldIcon /> },
   ];
 
   const isActive = (path) => {
@@ -243,11 +220,11 @@ const Dashboard = () => {
                 </ListItemIcon>
 
                 <ListItemText
-                  primary={item.text}
-                  primaryTypographyProps={{
-                    fontWeight: 600,
-                    fontSize: "0.9rem",
-                  }}
+                  primary={
+                    <Typography sx={{ fontWeight: 600, fontSize: "0.9rem" }}>
+                      {item.text}
+                    </Typography>
+                  }
                 />
               </ListItemButton>
             </Tooltip>
@@ -270,8 +247,11 @@ const Dashboard = () => {
               <LogoutIcon />
             </ListItemIcon>
             <ListItemText
-              primary="Logout"
-              primaryTypographyProps={{ fontWeight: 600, fontSize: "0.9rem" }}
+              primary={
+                <Typography sx={{ fontWeight: 600, fontSize: "0.9rem" }}>
+                  Logout
+                </Typography>
+              }
             />
           </ListItemButton>
         </ListItem>
@@ -431,39 +411,47 @@ const Dashboard = () => {
                     overflowY: "auto",
                   }}
                 >
-                  {notifications.map((notification) => (
-                    <MenuItem
-                      key={notification.id}
-                      onClick={handleNotificationClose}
-                      sx={{
-                        py: 1.5,
-                        alignItems: "flex-start",
-                        borderBottom: "1px solid",
-                        borderColor: "grey.100",
-                      }}
-                    >
-                      <Box>
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            fontWeight: 600,
-                            color: "text.primary",
-                          }}
-                        >
-                          {notification.title}
-                        </Typography>
+                  {notifications.length > 0 ? (
+                    notifications.map((notification) => (
+                      <MenuItem
+                        key={notification.id}
+                        onClick={handleNotificationClose}
+                        sx={{
+                          py: 1.5,
+                          alignItems: "flex-start",
+                          borderBottom: "1px solid",
+                          borderColor: "grey.100",
+                        }}
+                      >
+                        <Box>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontWeight: 600,
+                              color: "text.primary",
+                            }}
+                          >
+                            {notification.title}
+                          </Typography>
 
-                        <Typography
-                          variant="caption"
-                          sx={{
-                            color: "text.secondary",
-                          }}
-                        >
-                          {notification.time}
-                        </Typography>
-                      </Box>
-                    </MenuItem>
-                  ))}
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              color: "text.secondary",
+                            }}
+                          >
+                            {notification.time}
+                          </Typography>
+                        </Box>
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <Box sx={{ p: 3, textAlign: "center" }}>
+                      <Typography variant="body2" color="text.secondary">
+                        No new notifications
+                      </Typography>
+                    </Box>
+                  )}
                 </Box>
               </Menu>
             </Box>
@@ -481,6 +469,7 @@ const Dashboard = () => {
             <Route path="bookings" element={<BookingView />} />
             <Route path="profile" element={<ProfileView />} />
             <Route path="packing" element={<PackingView />} />
+            <Route path="culture-safety" element={<CultureSafetyAlerts />} />
           </Routes>
         </Box>
       </Box>

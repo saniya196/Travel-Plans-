@@ -175,46 +175,49 @@ const TripsView = () => {
                   {...params}
                   label="Destination *"
                   name="destination"
-                  InputProps={{
-                    ...params.InputProps,
-                    endAdornment: (
-                      <React.Fragment>
-                        {loadingOpts ? (
-                          <CircularProgress color="inherit" size={20} />
-                        ) : null}
-                        {params.InputProps.endAdornment}
-                      </React.Fragment>
-                    ),
+                  slotProps={{
+                    ...params.slotProps,
+                    input: {
+                      ...params.slotProps?.input,
+                      endAdornment: (
+                        <React.Fragment>
+                          {loadingOpts ? (
+                            <CircularProgress color="inherit" size={20} />
+                          ) : null}
+                          {params.slotProps?.input?.endAdornment}
+                        </React.Fragment>
+                      ),
+                    },
                   }}
                 />
               )}
             />
             <Grid container spacing={2}>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <TextField
                   fullWidth
                   name="startDate"
                   label="Start Date *"
                   type="date"
-                  InputLabelProps={{ shrink: true }}
+                  slotProps={{ inputLabel: { shrink: true } }}
                   value={formData.startDate}
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <TextField
                   fullWidth
                   name="endDate"
                   label="End Date *"
                   type="date"
-                  InputLabelProps={{ shrink: true }}
+                  slotProps={{ inputLabel: { shrink: true } }}
                   value={formData.endDate}
                   onChange={handleChange}
                 />
               </Grid>
             </Grid>
             <Grid container spacing={2}>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <TextField
                   fullWidth
                   name="budget"
@@ -224,7 +227,7 @@ const TripsView = () => {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <TextField
                   fullWidth
                   select
@@ -261,10 +264,10 @@ const TripsView = () => {
       </Dialog>
 
       {/* Trips Grid */}
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 2, md: 3 }}>
         {loading ? (
           Array.from({ length: 3 }).map((_, i) => (
-            <Grid item xs={12} md={6} lg={4} key={i}>
+            <Grid xs={12} md={6} lg={4} key={i}>
               <Paper sx={{ height: 280, borderRadius: 4 }} elevation={0} />
             </Grid>
           ))
@@ -278,7 +281,7 @@ const TripsView = () => {
                   )
                 : 0;
             return (
-              <Grid item xs={12} md={6} lg={4} key={trip._id}>
+              <Grid xs={12} md={6} lg={4} key={trip._id}>
                 <Card
                   elevation={0}
                   sx={{
@@ -323,8 +326,15 @@ const TripsView = () => {
                         />
                       </Box>
                     </Box>
-                    <CardContent sx={{ pb: "12px !important" }}>
-                      <Typography variant="h6" fontWeight={700} gutterBottom>
+                    <CardContent
+                      sx={{ pb: "12px !important", p: { xs: 2, sm: 3 } }}
+                    >
+                      <Typography
+                        variant="h6"
+                        fontWeight={700}
+                        gutterBottom
+                        sx={{ wordBreak: "break-word" }}
+                      >
                         {trip.destination}
                       </Typography>
                       <Box
@@ -333,6 +343,7 @@ const TripsView = () => {
                           alignItems: "center",
                           gap: 0.5,
                           mb: 1,
+                          flexWrap: "wrap",
                         }}
                       >
                         <DateRangeIcon fontSize="small" color="action" />
@@ -356,6 +367,7 @@ const TripsView = () => {
                             display: "flex",
                             alignItems: "center",
                             gap: 0.5,
+                            flexWrap: "wrap",
                           }}
                         >
                           <WalletIcon fontSize="small" color="success" />
@@ -375,7 +387,7 @@ const TripsView = () => {
             );
           })
         ) : (
-          <Grid item xs={12}>
+          <Grid xs={12}>
             <Paper
               sx={{
                 p: 6,
