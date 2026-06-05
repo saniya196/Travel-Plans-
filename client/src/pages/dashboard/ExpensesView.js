@@ -32,7 +32,6 @@ import {
   Pie,
   Cell,
   Tooltip as ReTooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 import {
@@ -445,52 +444,99 @@ const ExpensesView = () => {
         </Grid>
 
         {/* Pie Chart */}
-        <Grid xs={12} md={5}>
+        <Grid xs={12} md={7}>
           <Paper
             elevation={0}
             sx={{
-              p: 3,
+              p: 4,
               borderRadius: 3,
               border: "1px solid",
               borderColor: "divider",
-              height: "100%",
+              boxSizing: "border-box",
+              alignSelf: "flex-start",
             }}
           >
             <Typography variant="subtitle1" fontWeight={700} mb={2}>
               Spending Breakdown
             </Typography>
             {chartData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={280}>
-                <PieChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
-                  <Pie
-                    data={chartData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={85}
-                    paddingAngle={4}
-                    dataKey="value"
-                  >
-                    {chartData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={CHART_COLORS[index % CHART_COLORS.length]}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 3,
+                }}
+              >
+                <Box sx={{ flex: 1, minWidth: 180, width: 0 }}>
+                  <ResponsiveContainer width="100%" height={240}>
+                    <PieChart
+                      margin={{ top: 15, right: 15, bottom: 15, left: 30 }}
+                    >
+                      <Pie
+                        data={chartData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={55}
+                        outerRadius={80}
+                        paddingAngle={4}
+                        dataKey="value"
+                      >
+                        {chartData.map((entry, index) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={CATEGORY_COLORS[entry.name] || "#8884d8"}
+                          />
+                        ))}
+                      </Pie>
+                      <ReTooltip
+                        formatter={(value) => [
+                          `₹${value.toLocaleString()}`,
+                          "",
+                        ]}
                       />
-                    ))}
-                  </Pie>
-                  <ReTooltip
-                    formatter={(value) => [`₹${value.toLocaleString()}`, ""]}
-                  />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+                    </PieChart>
+                  </ResponsiveContainer>
+                </Box>
+                {/* Custom Legend */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 0.75,
+                    alignSelf: "center",
+                    pl: 1,
+                    flexShrink: 0,
+                  }}
+                >
+                  {chartData.map((entry) => (
+                    <Box
+                      key={entry.name}
+                      sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                    >
+                      <Box
+                        sx={{
+                          width: 15,
+                          height: 15,
+                          borderRadius: "3px",
+                          bgcolor: CATEGORY_COLORS[entry.name] || "#8884d8",
+                          flexShrink: 0,
+                        }}
+                      />
+                      <Typography variant="body2" sx={{ whiteSpace: "nowrap" }}>
+                        {entry.name}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
             ) : (
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  height: 280,
+                  height: 120,
                   flexDirection: "column",
                   gap: 1,
                 }}
