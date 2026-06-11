@@ -487,9 +487,6 @@ const Home = () => {
     };
   }, []);
 
-
-
-
   const handleAddTrip = (dest) => {
     // Save to recently viewed regardless of auth status
     addRecentlyViewed(dest); // ← MOVE THIS to the top, before the auth check
@@ -528,12 +525,12 @@ const Home = () => {
   /* Filter destinations based on "Where to" search input */
   const filteredDestinations = where.trim()
     ? (Array.isArray(destinations) ? destinations : []).filter(
-      (d) =>
-        (d.name || "").toLowerCase().includes(where.toLowerCase()) ||
-        (d.city || "").toLowerCase().includes(where.toLowerCase()) ||
-        (d.state || "").toLowerCase().includes(where.toLowerCase()) ||
-        (d.category || "").toLowerCase().includes(where.toLowerCase()),
-    )
+        (d) =>
+          (d.name || "").toLowerCase().includes(where.toLowerCase()) ||
+          (d.city || "").toLowerCase().includes(where.toLowerCase()) ||
+          (d.state || "").toLowerCase().includes(where.toLowerCase()) ||
+          (d.category || "").toLowerCase().includes(where.toLowerCase()),
+      )
     : Array.isArray(destinations)
       ? destinations
       : [];
@@ -566,9 +563,7 @@ const Home = () => {
             <a
               href="#wander-features"
               className={
-                activeSection === "wander-features"
-                  ? "wander-nav-active"
-                  : ""
+                activeSection === "wander-features" ? "wander-nav-active" : ""
               }
             >
               Features
@@ -912,8 +907,9 @@ const Home = () => {
               {loading
                 ? "Loading destinations…"
                 : where.trim()
-                  ? `${filteredDestinations.length} destination${filteredDestinations.length !== 1 ? "s" : ""
-                  } found`
+                  ? `${filteredDestinations.length} destination${
+                      filteredDestinations.length !== 1 ? "s" : ""
+                    } found`
                   : "Destinations that steal hearts"}
             </div>
           </div>
@@ -1044,7 +1040,7 @@ const Home = () => {
                     <div className="wander-dest-country">
                       {dest
                         ? [dest.city, dest.state].filter(Boolean).join(", ") ||
-                        item.fallbackLoc
+                          item.fallbackLoc
                         : item.fallbackLoc}
                     </div>
                   </div>
