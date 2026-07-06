@@ -497,8 +497,7 @@ const TripDetail = () => {
                   fontWeight={700}
                   color={budgetPercent > 90 ? "error.main" : "success.main"}
                 >
-                  {budgetPercent.toFixed(1)}%
-                  {isOverBudget && " (Over Budget)"}
+                  {budgetPercent.toFixed(1)}%{isOverBudget && " (Over Budget)"}
                 </Typography>
               </Box>
               <LinearProgress
